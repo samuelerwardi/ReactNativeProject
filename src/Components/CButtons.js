@@ -10,11 +10,11 @@ import {
 import Ripple from 'react-native-material-ripple';
 
 const styles = StyleSheet.create({
-    container:{
-        flex:2,
-        flexDirection: "column",
+    // container:{
+    //     flex:1,
+    //     flexDirection: "row",
 
-    }
+    // }
 })
 
 export default class CButtons extends React.Component{
@@ -24,7 +24,7 @@ export default class CButtons extends React.Component{
     render(){
         // {} kurawal pertaman menandakan JS, kurawal ke2 mendakan object JS
         return(
-            <Ripple style={{flex:1,flexDirection:"column"}}>
+            <Ripple style={{flexDirection:"column",flex: 1}}>
                 <View style={{
                     ...styles.container,
                     ...this.props.styleContainer

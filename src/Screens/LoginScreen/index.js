@@ -10,6 +10,9 @@ import {
 import CButtons from '../../Components/CButtons';
 import CTextInput from '../../Components/CTextInput';
 import styles from "./style";
+import config from "../../Config/Config";
+import axios from 'axios';
+const JSON5 = require('json5');
 
 
 export default class LoginScreen extends React.Component {
@@ -47,8 +50,47 @@ export default class LoginScreen extends React.Component {
     }
 
     componentDidMount() {
+        axios.post(`${config.baseUrl}`, {
+            transformResponse: [
+                function(data) {
+                  return data.data;
+                }
+            ]
+        })
+        .then(function (response) {
+            console.log(JSON5.parse(response.data)[0].access_token);
+            // console.log("response.data[0].access_token : " + response.data[0].access_token);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        // axios.post(`${config.baseUrl}`, {
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json;charset=UTF-8'
+        //     },
+        //     responseType: 'json'
+        // })
+        // .then(function (response) {
+        //     console.log(response);
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // });
+        // const user = {
+        //     name: this.state.name
+        // };
+        // axios.get(`https://jsonplaceholder.typicode.com/users`, {
+
+        // })
+        // .then(res => {
+        //   console.log(res);
+        //   console.log(res.data[0].name);
+        // })
+
         // console.log(this.state.loading);
-        ToastAndroid.show('A pikachu appeared nearby !1', ToastAndroid.SHORT);
+        ToastAndroid.show(`${config.baseUrl}`,ToastAndroid.LONG);
+        // ToastAndroid.show('A pikachu appeared nearby !1', ToastAndroid.SHORT);
     }
 
     render() {
@@ -99,7 +141,7 @@ export default class LoginScreen extends React.Component {
                     styleContainer={{
                         flex: 1,
                         margin:20,
-                        flexDirection:"column"
+                        flexDirection:"row"
                     }}
                     title={"LOGIN"}
                     color="grey"
