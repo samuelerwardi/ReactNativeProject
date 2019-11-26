@@ -22,9 +22,9 @@ export default class CButtons extends React.Component{
         // console.log(this.props);
     }
     render(){
-        // {} kurawal pertaman menandakan JS, kurawal ke2 mendakan object JS
+        // {} kurawal pertaman menandakan JSX, kurawal ke2 mendakan object JS
         return(
-            <Ripple style={{flexDirection:"column",flex: 1}}>
+            <Ripple style={{flexDirection:"column",flex: 1, color: "green"}}>
                 <View style={{
                     ...styles.container,
                     ...this.props.styleContainer
