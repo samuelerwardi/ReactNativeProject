@@ -4,66 +4,106 @@ import {
     Text, 
     ScrollView, 
     StyleSheet,
-    KeyboardAvoidingView } from "react-native";
+    KeyboardAvoidingView,
+    ToastAndroid } from "react-native";
     
 import colors from "../../Styles/Color";
 import InputField from "../../Components/InputField";
 import NextArrowButton from "../../Components/NextArrowButton";
+import axios from 'axios';
+import config from '../../Config/Config';
+
+const JSON5 = require("json5");
 export default class ExampleScreen extends Component {
-    static navigationOptions = {
-        title: 'Welcome',
-        header: null,
-    };
+  static navigationOptions = {
+      title: 'Welcome',
+      header: null,
+  };
+  _handlerSubmit = () => {
+      axios.post(`${config.baseUrl}`, {
+          transformResponse: [
+          ]
+      })
+      .then(function (response) {
+         ToastAndroid.show(JSON5.parse(response.data)[0].access_token, ToastAndroid.LONG);
+        //  ToastAndroid.show("test");
+      })
+      .catch(function (error) {
+        
+      });
+  }
+  
   render() {
     return (
-        <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
-            <View>
-                <ScrollView style={styles.scrollView}>
-                    <Text style={styles.loginHeader}>Login</Text>
-                    <InputField 
-                    labelText="EMAIL ADDRESS" 
-                    labelTextSize={14} 
-                    labelColor={colors.white} 
-                    textColor={colors.white} 
-                    borderBottomColor={colors.white} 
-                    inputType="email" 
-                    customStyle={{marginBottom:30}} />
-                    
-                    <InputField 
-                    labelText="PASSWORD" 
-                    labelTextSize={14} 
-                    labelColor={colors.white} 
-                    textColor={colors.white} 
-                    borderBottomColor={colors.white} 
-                    inputType="password"  
-                    customStyle={{marginBottom:30}} />
-                </ScrollView>
-                <NextArrowButton />
-            </View>
+      <KeyboardAvoidingView
+        style={styles.wrapper}
+        behavior="padding"
+      >
+          <View style={styles.scrollViewWrapper}>
+            <ScrollView style={styles.scrollView}>
+              <Text style={styles.loginHeader}>Login</Text>
+              <InputField 
+                labelText="EMAIL ADDRESS" 
+                labelTextSize={14} 
+                labelColor={colors.white} 
+                textColor={colors.white} 
+                borderBottomColor={colors.white} 
+                inputType="email" 
+                customStyle={{marginBottom:30}} />
+
+              <InputField 
+                labelText="PASSWORD" 
+                labelTextSize={14} 
+                labelColor={colors.white} 
+                textColor={colors.white} 
+                borderBottomColor={colors.white} 
+                inputType="password"  
+                customStyle={{marginBottom:30}} />
+            </ScrollView>
+            <NextArrowButton 
+              onPress={() =>{
+                this._handlerSubmit()
+              }}
+            />
+          </View>
        </KeyboardAvoidingView>
     );
   }
 }
+let headingTextSize = 30;
+
 const styles = StyleSheet.create({
-    wrapper: {
-      display: "flex",
-      flex: 1,
-      backgroundColor: colors.green01
-    },
-    scrollViewWrapper: {
-      marginTop: 70,
-      flex: 1
-    },
-    avoidView: {
-      paddingLeft: 30,
-      paddingRight: 30,
-      paddingTop: 20,
-      flex:1
-     },
-    loginHeader: {
-      fontSize: 28,
-      color: colors.white,
-      fontWeight: "300",
-      marginBottom: 40
-    }
-  });
+  wrapper: {
+    display: 'flex',
+    flex: 1,
+    backgroundColor: colors.green01
+  },
+  scrollViewWrapper: {
+    marginTop: 70,
+    flex: 1,
+    padding: 0,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
+  scrollView: {
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingTop: 20,
+    flex: 1,
+  },
+  loginHeader: {
+    fontSize: headingTextSize,
+    color: colors.white,
+    fontWeight: '300',
+    marginBottom: 40,
+  },
+  notificationWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+});

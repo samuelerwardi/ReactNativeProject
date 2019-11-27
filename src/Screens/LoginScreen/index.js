@@ -59,6 +59,7 @@ export default class LoginScreen extends React.Component {
         })
         .then(function (response) {
             console.log(JSON5.parse(response.data)[0].access_token);
+            ToastAndroid.show(JSON5.parse(response.data)[0].access_token, ToastAndroid.SHORT);
             // console.log("response.data[0].access_token : " + response.data[0].access_token);
         })
         .catch(function (error) {
@@ -141,7 +142,7 @@ export default class LoginScreen extends React.Component {
                     styleContainer={{
                         flex: 1,
                         margin:20,
-                        flexDirection:"row"
+                        flexDirection:"column"
                     }}
                     title={"LOGIN"}
                     color="grey"

@@ -24,7 +24,7 @@ const AppNavigator = createStackNavigator(
         },
     },
     {
-        initialRouteName: "Example2",
+        initialRouteName: "Example",
     }
 );
 

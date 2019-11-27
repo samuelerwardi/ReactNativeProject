@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { PropTypes } from "prop-types";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { TouchableHighlight, StyleSheet, Text, View } from "react-native";
+import { TouchableHighlight, 
+          StyleSheet, 
+          Text, 
+          View,
+          ToastAndroid } from "react-native";
 import colors from "../Styles/Color";
 // import styles from "../Styles/"
 
 export default class NextArrowButton extends Component {
-    
     render() {
         NextArrowButton.propTypes = {
             disabled: PropTypes.bool,
@@ -14,7 +17,10 @@ export default class NextArrowButton extends Component {
         };
       return (
         <View style={styles.buttonWrapper}>
-          <TouchableHighlight style={[{ opacity: 0.6 }, styles.button]}>
+          <TouchableHighlight 
+              style={[{ opacity: 0.6 }, styles.button]}
+              onPress={() => {this.props.onPress()}}>
+
             <Icon
               name="angle-right"
               color={colors.green01}
@@ -31,7 +37,7 @@ const styles = StyleSheet.create({
       alignItems: "flex-end",
       right: 20,
       bottom: 20,
-      paddingTop: 0
+      paddingTop: 40,
     },
     button: {
       alignItems: "center",
@@ -39,7 +45,7 @@ const styles = StyleSheet.create({
       borderRadius: 50,
       width: 60,
       height: 60,
-      backgroundColor: colors.white
+      backgroundColor: colors.debug
     },
     icon: {
       marginRight: -2,
