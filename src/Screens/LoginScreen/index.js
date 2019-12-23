@@ -12,6 +12,8 @@ import CTextInput from '../../Components/CTextInput';
 import styles from "./style";
 import config from "../../Config/Config";
 import axios from 'axios';
+import {createStore} from "redux";
+console.log(createStore);
 const JSON5 = require('json5');
 
 

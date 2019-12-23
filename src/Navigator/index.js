@@ -29,5 +29,5 @@ const AppNavigator = createStackNavigator(
 );
 
 const Navigator = createAppContainer(AppNavigator);
-
+console.log(navigator);
 export default Navigator;

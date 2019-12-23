@@ -24,6 +24,11 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Navigator from './src/Navigator';
+import { createStore, applyMiddleware } from 'redux';
+console.log(createStore);
+
+// const createStore = redux.createStore;
+// console.log(createStore);
 
 const App: () => React$Node = () => {
   return (

@@ -15,22 +15,37 @@ import config from '../../Config/Config';
 
 const JSON5 = require("json5");
 export default class ExampleScreen extends Component {
+  constructor(props){
+    super();
+    this.state = {
+        isLoading : false,
+        username: "",
+        password: ""
+    }
+}
+
   static navigationOptions = {
       title: 'Welcome',
       header: null,
   };
-  _handlerSubmit = () => {
-      axios.post(`${config.baseUrl}`, {
-          transformResponse: [
-          ]
-      })
-      .then(function (response) {
-         ToastAndroid.show(JSON5.parse(response.data)[0].access_token, ToastAndroid.LONG);
-        //  ToastAndroid.show("test");
-      })
-      .catch(function (error) {
-        
-      });
+  componentDidMount() {
+
+  }
+  _handlerSubmit = (props) => {
+    console.log(props);
+    axios.post(`${config.baseUrl}`, {
+        transformResponse: [
+        ]
+    })
+    .then(function (response) {
+      console.log("start");
+      if(JSON5.parse(response.data)[0].access_token){
+        ToastAndroid.show(JSON5.parse(response.data)[0].access_token, ToastAndroid.LONG);
+        props.navigation.navigate("Home"); 
+      }
+    })
+    .catch(function (error) {
+    });
   }
   
   render() {
@@ -62,7 +77,7 @@ export default class ExampleScreen extends Component {
             </ScrollView>
             <NextArrowButton 
               onPress={() =>{
-                this._handlerSubmit()
+                this._handlerSubmit(this.props)
               }}
             />
           </View>
